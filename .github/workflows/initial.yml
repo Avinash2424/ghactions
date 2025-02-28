@@ -21,7 +21,7 @@ jobs:
       - name: get file
         run: |
           cat "${{ github.event.inputs.env }}.yml"
-          API_KEY=$(jq -r '.name' $NAME)
+          API_KEY=$(yq -r '.name' $NAME)
           echo "NAME=$NAME" >> $GITHUB_ENV
 
       - name: print
