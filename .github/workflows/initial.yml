@@ -14,4 +14,15 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: echo file
-        run: echo ${{ github.event.inputs.env}}
+        run: |
+          echo ${{ github.event.inputs.env}}
+        if: ${{ github.event.inputs.env}} == application
+
+      - name: get file
+        run: |
+          cat "${{ github.event.inputs.env }}.yml"
+          API_KEY=$(jq -r '.name' $NAME)
+          echo "NAME=$NAME" >> $GITHUB_ENV
+
+      - name: print
+        run: echo $NAME
